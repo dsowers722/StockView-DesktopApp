@@ -50,12 +50,10 @@ public class LoginWindow extends JFrame implements Runnable, ActionListener {
             if (accountsManager.accountExists(usernameField.getText(),
                     passwordField.getText())) {
                 // If login is successful
-                System.out.println("Account exists");
                 SwingUtilities.invokeLater(new TradeWindow());
                 this.dispose();
             } else {
                 // If login is unsuccessful
-                System.out.println("Account does not exist");
                 JOptionPane.showMessageDialog(null,
                                       "You have entered incorrect login information!", "Error",
                                               JOptionPane.ERROR_MESSAGE);
