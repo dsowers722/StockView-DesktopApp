@@ -46,11 +46,12 @@ public class LoginWindow extends JFrame implements Runnable, ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            System.out.println("Logging in");
             if (accountsManager.accountExists(usernameField.getText(),
                     passwordField.getText())) {
                 // If login is successful
-                SwingUtilities.invokeLater(new TradeWindow());
+                TradeWindow tradeWindow = new TradeWindow(accountsManager.getAccount(usernameField.getText(),
+                                                  passwordField.getText()));
+                SwingUtilities.invokeLater(tradeWindow);
                 this.dispose();
             } else {
                 // If login is unsuccessful
@@ -63,7 +64,6 @@ public class LoginWindow extends JFrame implements Runnable, ActionListener {
         }
         if (e.getSource() == createAccButton) {
             accountsManager.newAccount(usernameField.getText(), passwordField.getText());
-            System.out.println("Creating account");
         }
     }
 

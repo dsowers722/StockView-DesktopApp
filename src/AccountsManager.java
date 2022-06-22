@@ -29,11 +29,18 @@ public class AccountsManager {
 
     public boolean accountExists(String receivedUsername, String receivedPassword) {
         for (Account account : accountList) {
-            System.out.println(account.getUsername());
             if ((account.getUsername().equals(receivedUsername)) && (account.getPassword().equals(receivedPassword)))
                 return true;
         }
         return false;
+    }
+
+    public Account getAccount(String username, String password) {
+        for (Account account : accountList) {
+            if ((account.getUsername().equals(username)) && (account.getPassword().equals(password)))
+                return account;
+        }
+        return null;
     }
 
     public static void SaveData(ArrayList<Account> accountList) {
