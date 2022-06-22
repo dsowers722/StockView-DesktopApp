@@ -20,7 +20,7 @@ public class LoginWindow extends JFrame implements Runnable, ActionListener {
         this.setLayout(null); // Don't want a layout manager
         this.setResizable(false); // Disable resize
         this.setTitle("Login to StockView"); // Title
-        this.getContentPane().setBackground(new Color(28, 27, 34)); // Background color
+        this.getContentPane().setBackground(new Color(40, 42, 54)); // Background color
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Closing window ends program
 
         // Set up and add buttons

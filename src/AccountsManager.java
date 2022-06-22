@@ -1,7 +1,5 @@
-import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AccountsManager {
 
@@ -14,9 +12,7 @@ public class AccountsManager {
             try (ObjectInputStream objectInStream = new ObjectInputStream(new FileInputStream(directory))) {
                 accountList = (ArrayList<Account>)objectInStream.readObject();
             } catch (Exception exception) {
-                JOptionPane.showMessageDialog(null,
-                        "An error has occurred\n" + Arrays.toString(exception.getStackTrace()), "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                exception.printStackTrace();
             }
         }
     }
