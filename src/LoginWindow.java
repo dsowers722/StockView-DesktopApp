@@ -62,6 +62,7 @@ public class LoginWindow extends JFrame implements Runnable, ActionListener {
             }
         }
         if (e.getSource() == createAccButton) {
+            accountsManager.newAccount(usernameField.getText(), passwordField.getText());
             System.out.println("Creating account");
         }
     }

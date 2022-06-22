@@ -1,10 +1,10 @@
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AccountsManager {
 
-    private String receivedUsername;
-    private String receivedPassword;
     private ArrayList<Account> accountList = new ArrayList<>();
     private static final String directory = System.getProperty("user.dir") + "/Accounts.ser";
 
@@ -12,44 +12,35 @@ public class AccountsManager {
         if (((new File(directory)).exists()) && ((new File(directory)).length() != 0)) {
             // If the file exists and is not empty, read the data into the arrayList of accounts
             try (ObjectInputStream objectInStream = new ObjectInputStream(new FileInputStream(directory))) {
-                accountList= (ArrayList<Account>)objectInStream.readObject();
+                accountList = (ArrayList<Account>)objectInStream.readObject();
             } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-            //TODO Check if username and password is correct
-
-        } else {
-            Account newAccount = new Account(receivedUsername, receivedPassword);
-            accountList.add(newAccount);
-            // Create and write to the file the new list of accounts
-            try (ObjectOutputStream objectOutStream = new ObjectOutputStream(new FileOutputStream(directory,
-                                                                                                false))){
-                objectOutStream.writeObject(accountList);
-            } catch (IOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null,
+                        "An error has occurred\n" + Arrays.toString(exception.getStackTrace()), "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-    public void setReceivedUsername(String receivedUsername) {
-        this.receivedUsername = receivedUsername;
-    }
-
-    public void setReceivedPassword(String receivedPassword) {
-        this.receivedPassword = receivedPassword;
-    }
-
-    public String getReceivedUsername() {
-        return receivedUsername;
-    }
-
-    public String getReceivedPassword() {
-        return receivedPassword;
+    public void newAccount(String newUsername, String newPassword) {
+        Account account = new Account(newUsername, newPassword);
+        accountList.add(account);
+        SaveData(accountList);
     }
 
     public boolean accountExists(String receivedUsername, String receivedPassword) {
+        for (Account account : accountList) {
+            System.out.println(account.getUsername());
+            if ((account.getUsername().equals(receivedUsername)) && (account.getPassword().equals(receivedPassword)))
+                return true;
+        }
         return false;
     }
 
-    public void createAccount(String receivedUsername, String receivedPassword) {}
+    public static void SaveData(ArrayList<Account> accountList) {
+        try (ObjectOutputStream objectOutStream = new ObjectOutputStream(new FileOutputStream(directory))){
+            objectOutStream.writeObject(accountList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
