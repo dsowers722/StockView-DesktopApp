@@ -19,13 +19,11 @@ public class TradeWindow extends JFrame implements Runnable {
         this.setTitle("StockView");
         this.setResizable(false);
         this.getContentPane().setBackground(new Color(40, 42, 54));
-        //////////
-        JLabel label = new JLabel("Hi, " + activeAccount.getUsername());
-        label.setFont(new Font(null, Font.PLAIN, 30));
-        label.setVisible(true);
-        label.setForeground(new Color(117, 215, 235));
-        this.add(BorderLayout.NORTH, label);
-        /////////
         this.setVisible(true);
+    }
+
+    public JPanel addPanel(Color background, Color foreground) {
+        JPanel panel = new JPanel();
+        return panel;
     }
 }
