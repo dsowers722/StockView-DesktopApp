@@ -22,8 +22,15 @@ public class TradeWindow extends JFrame implements Runnable {
         this.setVisible(true);
     }
 
-    public JPanel addPanel(Color background, Color foreground) {
+    public JPanel addPanel(LayoutManager layout, Color background) {
         JPanel panel = new JPanel();
+        panel.setBackground(background);
+        panel.setLayout(layout);
         return panel;
+    }
+
+    public JLabel addLabel() {
+        JLabel label = new JLabel();
+        return label;
     }
 }
