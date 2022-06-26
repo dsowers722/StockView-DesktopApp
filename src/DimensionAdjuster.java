@@ -9,19 +9,19 @@ public class DimensionAdjuster {
     public DimensionAdjuster() {
         systemHeight = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         systemWidth = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        displayRatio = (double)1920 / systemWidth;
+        displayRatio = (double) 1920 / systemWidth;
     }
 
     public int adjustedFontSize(int fontSize) {
         return (int)(fontSize / displayRatio);
     }
 
-    public int adjustedWidth() {
-        return (int)(systemWidth / displayRatio);
+    public int adjustedWidth(int width) {
+        return (int)(width / displayRatio);
     }
 
-    public int adjustedHeight() {
-        return (int)(systemHeight / displayRatio);
+    public int adjustedHeight(int height) {
+        return (int)(height / displayRatio);
     }
 
     public int adjustedXBound(int xBound) {
