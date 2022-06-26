@@ -9,7 +9,7 @@ public class DimensionAdjuster {
     public DimensionAdjuster() {
         systemHeight = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         systemWidth = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        displayRatio = (double) 1920 / systemWidth;
+        displayRatio = (double)1920 / systemWidth;
     }
 
     public int adjustedFontSize(int fontSize) {
