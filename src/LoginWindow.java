@@ -9,7 +9,7 @@ public class LoginWindow extends JFrame implements Runnable, ActionListener {
 
     DimensionAdjuster adjuster = new DimensionAdjuster();
     AccountsManager accountsManager = new AccountsManager();
-    Font font = new Font(Font.MONOSPACED, Font.PLAIN, adjuster.adjustedFontSize(10));
+    Font font = new Font(Font.MONOSPACED, Font.PLAIN, adjuster.adjustedFontSize(12));
     JLabel welcomeLabel = addLabel("Welcome to StockView!", new Color(80, 250, 125),
                                    new Font(Font.MONOSPACED, Font.PLAIN, adjuster.adjustedFontSize(20)),
                                    new Rectangle(adjuster.adjustedXBound(76), adjuster.adjustedYBound(55),
@@ -39,7 +39,7 @@ public class LoginWindow extends JFrame implements Runnable, ActionListener {
         this.getContentPane().add(createAccButton); // Add sign up button
         this.getContentPane().add(usernameField); // Add username field
         this.getContentPane().add(passwordField); // Add password field
-        this.getContentPane().add(welcomeLabel);
+        this.getContentPane().add(welcomeLabel); // Add the welcome label
         this.setVisible(true); // Make it visible
     }
 
@@ -49,7 +49,7 @@ public class LoginWindow extends JFrame implements Runnable, ActionListener {
                     passwordField.getText())) {
                 // If login is successful
                 TradeWindow tradeWindow = new TradeWindow(accountsManager.getAccount(usernameField.getText(),
-                                                  passwordField.getText()));
+                                                                                     passwordField.getText()));
                 SwingUtilities.invokeLater(tradeWindow);
                 this.dispose();
             } else {
