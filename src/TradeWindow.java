@@ -1,14 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class TradeWindow extends JFrame implements Runnable {
+public class TradeWindow extends JFrame implements Runnable, ActionListener {
 
     Account activeAccount;
     DimensionAdjuster adjuster = new DimensionAdjuster();
     Font font = new Font(Font.MONOSPACED, Font.PLAIN, adjuster.adjustedFontSize(12));
     JPanel westPanel = addPanel(new Color(40, 45, 55),
                                 new Dimension(adjuster.adjustedWidth(300), adjuster.adjustedHeight(800)));
-    JPanel eastPanel = addPanel(new Color(40, 45, 55),
+    JPanel eastPanel = addPanel(new Color(40, 45, 45/*55*/),
                                 new Dimension(adjuster.adjustedWidth(300), adjuster.adjustedHeight(800)));
     JPanel northPanel = addPanel(new Color(40, 45, 55),
                                  new Dimension(adjuster.adjustedWidth(1400), adjuster.adjustedHeight(80)));
@@ -17,10 +21,10 @@ public class TradeWindow extends JFrame implements Runnable {
 
     public TradeWindow(Account activeAccount) {
         this.activeAccount = activeAccount;
+        this.activeAccount.setTotalBalance(200);
     }
 
     public synchronized void run() {
-        System.out.println(activeAccount.getUsername());
         this.setSize(adjuster.adjustedWidth(1400), adjuster.adjustedHeight(900));
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,6 +46,10 @@ public class TradeWindow extends JFrame implements Runnable {
         this.setVisible(true);
     }
 
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
     public JPanel addPanel(Color background, Dimension dimension) {
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -57,4 +65,32 @@ public class TradeWindow extends JFrame implements Runnable {
         label.setFont(font);
         return label;
     }
+
+    public JButton addButton(String title, Color background, Color foreground, Rectangle bounds) {
+        JButton button = new JButton(title);
+        button.addActionListener(this);
+        button.setBackground(background);
+        button.setForeground(foreground);
+        button.setFocusable(false);
+        button.setBounds(bounds);
+        button.setFont(font);
+        return button;
+    }
+
+    public JTextField addTextField(String title, Color background, Color foreground, Rectangle bounds) {
+        JTextField textField = new JTextField(title);
+        textField.setBackground(background);
+        textField.setForeground(foreground);
+        textField.addActionListener(this);
+        textField.setFocusable(true);
+        textField.setBounds(bounds);
+        textField.setFont(font);
+        textField.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (textField.getText().equals(title))
+                    textField.setText("");
+            }
+        }); // Change the title text to empty as soon as clicked
+        return textField;
+    } // This method is a basic template for creating text fields
 }

@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 public class Account implements Serializable {
 
-    String username;
-    String password;
-    double usedBalance;
-    double totalBalance;
-    double availableBalance;
-    ArrayList<Stock> stocks = new ArrayList<>();
+    private String username;
+    private String password;
+    private double usedBalance;
+    private double totalBalance;
+    private double availableBalance;
+    private ArrayList<Stock> stocks = new ArrayList<>();
 
 
     public Account(String username, String password) {
@@ -22,5 +22,13 @@ public class Account implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setTotalBalance(double balance) {
+        this.totalBalance = balance;
+    }
+
+    public double getTotalBalance() {
+        return this.totalBalance;
     }
 }
