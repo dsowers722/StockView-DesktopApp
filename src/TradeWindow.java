@@ -7,17 +7,28 @@ import java.awt.event.MouseEvent;
 
 public class TradeWindow extends JFrame implements Runnable, ActionListener {
 
+    Stock currentStock;
     Account activeAccount;
     DimensionAdjuster adjuster = new DimensionAdjuster();
-    Font font = new Font(Font.MONOSPACED, Font.PLAIN, adjuster.adjustedFontSize(12));
+    // 40, 45, 55 as the default color
+    Font font = new Font(Font.MONOSPACED, Font.ITALIC, adjuster.adjustedFontSize(22));
+    JButton buyButton = addButton("Buy", new Color(80, 250, 125), Color.BLACK,
+                                  new Rectangle(adjuster.adjustedXBound(100), adjuster.adjustedYBound(200),
+                                                adjuster.adjustedWidth(100), adjuster.adjustedHeight(20)));
+    JButton sellButton = addButton("Sell", new Color(255, 0, 0), Color.BLACK,
+                                   new Rectangle(adjuster.adjustedXBound(150), adjuster.adjustedYBound(200),
+                                                 adjuster.adjustedWidth(100), adjuster.adjustedHeight(20)));;
+    JButton detailsButton;
     JPanel westPanel = addPanel(new Color(40, 45, 55),
                                 new Dimension(adjuster.adjustedWidth(300), adjuster.adjustedHeight(800)));
-    JPanel eastPanel = addPanel(new Color(40, 45, 45/*55*/),
+    JPanel eastPanel = addPanel(new Color(40, 45, 55),
                                 new Dimension(adjuster.adjustedWidth(300), adjuster.adjustedHeight(800)));
     JPanel northPanel = addPanel(new Color(40, 45, 55),
                                  new Dimension(adjuster.adjustedWidth(1400), adjuster.adjustedHeight(80)));
     JPanel southPanel = addPanel(new Color(40, 45, 55),
                                  new Dimension(adjuster.adjustedWidth(1400), adjuster.adjustedHeight(80)));
+    JPanel centerPanel = addPanel(new Color(40, 45, 100 /*55*/),
+                                  new Dimension(adjuster.adjustedWidth(1400), adjuster.adjustedHeight(800)));
 
     public TradeWindow(Account activeAccount) {
         this.activeAccount = activeAccount;
@@ -31,18 +42,22 @@ public class TradeWindow extends JFrame implements Runnable, ActionListener {
         this.setTitle("StockView");
         this.setResizable(false);
         this.getContentPane().setBackground(new Color(40, 45, 55));
-        // Panels
-        //northPanel.add(welcomeLabel);
+        // North Panel
         northPanel.add(addLabel("Welcome, " + activeAccount.getUsername(),
-                                new Color(140, 235, 255),
-                                new Rectangle(adjuster.adjustedXBound(600), adjuster.adjustedYBound(15),
+                                new Color(120, 215, 235),
+                                new Rectangle(adjuster.adjustedXBound(590), adjuster.adjustedYBound(15),
                                               adjuster.adjustedWidth(1400), adjuster.adjustedHeight(100)),
                                 new Font(font.getFontName(), Font.ITALIC, adjuster.adjustedFontSize(22))));
+        // Center Panel
+        centerPanel.add(buyButton);
+        centerPanel.add(sellButton);
+        // Add the panels
         this.add(BorderLayout.EAST, eastPanel);
         this.add(BorderLayout.WEST, westPanel);
         this.add(BorderLayout.NORTH, northPanel);
         this.add(BorderLayout.SOUTH, southPanel);
-        // Add panels and make the frame visible
+        this.add(BorderLayout.CENTER, centerPanel);
+        // Make the window visible
         this.setVisible(true);
     }
 

@@ -10,7 +10,6 @@ public class Account implements Serializable {
     private double availableBalance;
     private ArrayList<Stock> stocks = new ArrayList<>();
 
-
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
@@ -31,4 +30,8 @@ public class Account implements Serializable {
     public double getTotalBalance() {
         return this.totalBalance;
     }
+
+    /*public Stock getStock(String ticker) {
+
+    } */
 }

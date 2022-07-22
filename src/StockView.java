@@ -4,6 +4,6 @@ import javax.swing.*;
 
 public class StockView {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new LoginWindow());
+        SwingUtilities.invokeLater(new  LoginWindow());
     }
 }
