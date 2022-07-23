@@ -10,15 +10,19 @@ public class TradeWindow extends JFrame implements Runnable, ActionListener {
     Stock currentStock;
     Account activeAccount;
     DimensionAdjuster adjuster = new DimensionAdjuster();
-    // 40, 45, 55 as the default color
     Font font = new Font(Font.MONOSPACED, Font.ITALIC, adjuster.adjustedFontSize(22));
+    JTextField stockSearch = addTextField("Search", new Color(125, 125, 125), Color.BLACK,
+                                          new Rectangle(adjuster.adjustedXBound(270), adjuster.adjustedYBound(415),
+                                                        adjuster.adjustedWidth(275), adjuster.adjustedHeight(20)));
     JButton buyButton = addButton("Buy", new Color(80, 250, 125), Color.BLACK,
-                                  new Rectangle(adjuster.adjustedXBound(100), adjuster.adjustedYBound(200),
-                                                adjuster.adjustedWidth(100), adjuster.adjustedHeight(20)));
-    JButton sellButton = addButton("Sell", new Color(255, 0, 0), Color.BLACK,
-                                   new Rectangle(adjuster.adjustedXBound(150), adjuster.adjustedYBound(200),
-                                                 adjuster.adjustedWidth(100), adjuster.adjustedHeight(20)));;
-    JButton detailsButton;
+                                  new Rectangle(adjuster.adjustedXBound(270), adjuster.adjustedYBound(450),
+                                                adjuster.adjustedWidth(75), adjuster.adjustedHeight(20)));
+    JButton sellButton = addButton("Sell", new Color(225, 85, 165), Color.BLACK,
+                                   new Rectangle(adjuster.adjustedXBound(470), adjuster.adjustedYBound(450),
+                                                 adjuster.adjustedWidth(75), adjuster.adjustedHeight(20)));
+    JButton detailsButton = addButton("Details", new Color(125, 125, 125), Color.BLACK,
+                                      new Rectangle(adjuster.adjustedXBound(370), adjuster.adjustedYBound(450),
+                                                    adjuster.adjustedWidth(75), adjuster.adjustedHeight(20)));
     JPanel westPanel = addPanel(new Color(40, 45, 55),
                                 new Dimension(adjuster.adjustedWidth(300), adjuster.adjustedHeight(800)));
     JPanel eastPanel = addPanel(new Color(40, 45, 55),
@@ -27,7 +31,7 @@ public class TradeWindow extends JFrame implements Runnable, ActionListener {
                                  new Dimension(adjuster.adjustedWidth(1400), adjuster.adjustedHeight(80)));
     JPanel southPanel = addPanel(new Color(40, 45, 55),
                                  new Dimension(adjuster.adjustedWidth(1400), adjuster.adjustedHeight(80)));
-    JPanel centerPanel = addPanel(new Color(40, 45, 100 /*55*/),
+    JPanel centerPanel = addPanel(new Color(40, 45, 55),
                                   new Dimension(adjuster.adjustedWidth(1400), adjuster.adjustedHeight(800)));
 
     public TradeWindow(Account activeAccount) {
@@ -45,12 +49,26 @@ public class TradeWindow extends JFrame implements Runnable, ActionListener {
         // North Panel
         northPanel.add(addLabel("Welcome, " + activeAccount.getUsername(),
                                 new Color(120, 215, 235),
-                                new Rectangle(adjuster.adjustedXBound(590), adjuster.adjustedYBound(15),
+                                new Rectangle(adjuster.adjustedXBound(595), adjuster.adjustedYBound(15),
                                               adjuster.adjustedWidth(1400), adjuster.adjustedHeight(100)),
                                 new Font(font.getFontName(), Font.ITALIC, adjuster.adjustedFontSize(22))));
         // Center Panel
+        buyButton.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
+        sellButton.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
+        detailsButton.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
+        stockSearch.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
         centerPanel.add(buyButton);
         centerPanel.add(sellButton);
+        centerPanel.add(detailsButton);
+        centerPanel.add(stockSearch);
+        centerPanel.add(addLabel("Price", new Color(120, 215, 235),
+                                new Rectangle(adjuster.adjustedXBound(370), adjuster.adjustedYBound(360),
+                                              adjuster.adjustedWidth(1400), adjuster.adjustedHeight(50)),
+                                new Font(font.getFontName(), Font.ITALIC, adjuster.adjustedFontSize(22))));
+        centerPanel.add(addLabel("Stock Name", new Color(120, 215, 235),
+                                 new Rectangle(adjuster.adjustedXBound(330), adjuster.adjustedYBound(320),
+                                               adjuster.adjustedWidth(1400), adjuster.adjustedHeight(50)),
+                                 new Font(font.getFontName(), Font.ITALIC, adjuster.adjustedFontSize(22))));
         // Add the panels
         this.add(BorderLayout.EAST, eastPanel);
         this.add(BorderLayout.WEST, westPanel);
