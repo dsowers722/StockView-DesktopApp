@@ -9,18 +9,22 @@ public class TradeWindow extends JFrame implements Runnable, ActionListener {
 
     Stock currentStock;
     Account activeAccount;
+    SearchInterface searchInterface;
     DimensionAdjuster adjuster = new DimensionAdjuster();
     Font font = new Font(Font.MONOSPACED, Font.ITALIC, adjuster.adjustedFontSize(22));
-    JTextField stockSearch = addTextField("Search", new Color(125, 125, 125), Color.BLACK,
+    JTextField stockSearch = addTextField("search", new Color(125, 125, 125), Color.BLACK,
                                           new Rectangle(adjuster.adjustedXBound(270), adjuster.adjustedYBound(415),
-                                                        adjuster.adjustedWidth(275), adjuster.adjustedHeight(20)));
-    JButton buyButton = addButton("Buy", new Color(80, 250, 125), Color.BLACK,
+                                                        adjuster.adjustedWidth(175), adjuster.adjustedHeight(20)));
+    JButton searchButton = addButton("search", new Color(120, 215, 235), Color.BLACK,
+                                     new Rectangle(adjuster.adjustedXBound(470), adjuster.adjustedYBound(415),
+                                                   adjuster.adjustedWidth(75), adjuster.adjustedHeight(20)));
+    JButton buyButton = addButton("buy", new Color(80, 250, 125), Color.BLACK,
                                   new Rectangle(adjuster.adjustedXBound(270), adjuster.adjustedYBound(450),
                                                 adjuster.adjustedWidth(75), adjuster.adjustedHeight(20)));
-    JButton sellButton = addButton("Sell", new Color(225, 85, 165), Color.BLACK,
+    JButton sellButton = addButton("sell", new Color(225, 85, 165), Color.BLACK,
                                    new Rectangle(adjuster.adjustedXBound(470), adjuster.adjustedYBound(450),
                                                  adjuster.adjustedWidth(75), adjuster.adjustedHeight(20)));
-    JButton detailsButton = addButton("Details", new Color(125, 125, 125), Color.BLACK,
+    JButton detailsButton = addButton("details", new Color(125, 125, 125), Color.BLACK,
                                       new Rectangle(adjuster.adjustedXBound(370), adjuster.adjustedYBound(450),
                                                     adjuster.adjustedWidth(75), adjuster.adjustedHeight(20)));
     JPanel westPanel = addPanel(new Color(40, 45, 55),
@@ -56,17 +60,19 @@ public class TradeWindow extends JFrame implements Runnable, ActionListener {
         buyButton.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
         sellButton.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
         detailsButton.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
+        searchButton.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
         stockSearch.setFont(font.deriveFont((float)adjuster.adjustedFontSize(12)));
         centerPanel.add(buyButton);
         centerPanel.add(sellButton);
         centerPanel.add(detailsButton);
+        centerPanel.add(searchButton);
         centerPanel.add(stockSearch);
         centerPanel.add(addLabel("Price", new Color(120, 215, 235),
                                 new Rectangle(adjuster.adjustedXBound(370), adjuster.adjustedYBound(360),
                                               adjuster.adjustedWidth(1400), adjuster.adjustedHeight(50)),
                                 new Font(font.getFontName(), Font.ITALIC, adjuster.adjustedFontSize(22))));
         centerPanel.add(addLabel("Stock Name", new Color(120, 215, 235),
-                                 new Rectangle(adjuster.adjustedXBound(330), adjuster.adjustedYBound(320),
+                                 new Rectangle(adjuster.adjustedXBound(335), adjuster.adjustedYBound(320),
                                                adjuster.adjustedWidth(1400), adjuster.adjustedHeight(50)),
                                  new Font(font.getFontName(), Font.ITALIC, adjuster.adjustedFontSize(22))));
         // Add the panels
@@ -80,7 +86,19 @@ public class TradeWindow extends JFrame implements Runnable, ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource() == buyButton) {
+            System.out.println("buy");
+        }
+        if (e.getSource() == sellButton) {
+            System.out.println("sell");
+        }
+        if (e.getSource() == detailsButton) {
+            System.out.println("details");
+        }
+        if (e.getSource() == searchButton) {
+            System.out.println("search");
+            searchInterface = new SearchInterface(stockSearch.getText());
+        }
     }
 
     public JPanel addPanel(Color background, Dimension dimension) {

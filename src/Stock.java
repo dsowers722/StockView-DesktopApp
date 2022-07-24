@@ -1,26 +1,16 @@
 public class Stock {
 
     private double price;
-    private int numberOfShares;
     private String companyName;
     private final String ticker;
-    SearchInteface searchInteface;
 
-    public Stock(String ticker) {
+    public Stock(String ticker, String companyName) {
         this.ticker = ticker;
-        searchInteface =  new SearchInteface(ticker);
-    }
-
-    public double getTotalCost() {
-        return price * numberOfShares;
+        this.companyName = companyName;
     }
 
     public double getPrice() {
         return price;
-    }
-
-    public int getNumberOfShares() {
-        return numberOfShares;
     }
 
     public String getTicker() {
@@ -28,6 +18,6 @@ public class Stock {
     }
 
     public String getCompanyName() {
-        return "company";
+        return companyName;
     }
 }

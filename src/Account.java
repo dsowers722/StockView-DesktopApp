@@ -30,8 +30,4 @@ public class Account implements Serializable {
     public double getTotalBalance() {
         return this.totalBalance;
     }
-
-    /*public Stock getStock(String ticker) {
-
-    } */
 }
